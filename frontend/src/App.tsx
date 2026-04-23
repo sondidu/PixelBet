@@ -60,6 +60,7 @@ function App() {
           </svg>
           <h2>Connect with us</h2>
           <p>Join the Vite community</p>
+          <p>Hello world!!!</p>
           <ul>
             <li>
               <a href="https://github.com/vitejs/vite" target="_blank">
