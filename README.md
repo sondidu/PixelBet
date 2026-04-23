@@ -29,7 +29,7 @@ PixelBet is a blockchain-based gambling platform where players wager on the outc
 
 | Component | URL |
 |-----------|-----|
-| Frontend (Vercel) | _TBD_ |
+| Frontend (Vercel) | https://pixel-bet.vercel.app |
 | GameManager Contract (Sepolia Etherscan) | _TBD_ |
 | Betting Contract (Sepolia Etherscan) | _TBD_ |
 | Config Contract (Sepolia Etherscan) | _TBD_ |
