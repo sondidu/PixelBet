@@ -21,15 +21,15 @@ import type {
 
 export interface SimpleContractInterface extends Interface {
   getFunction(
-    nameOrSignature: "getName" | "setName" | "storeName"
+    nameOrSignature: "setName" | "getName" | "storeName"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "getName", values?: undefined): string;
   encodeFunctionData(functionFragment: "setName", values: [string]): string;
+  encodeFunctionData(functionFragment: "getName", values?: undefined): string;
   encodeFunctionData(functionFragment: "storeName", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: "getName", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setName", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getName", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "storeName", data: BytesLike): Result;
 }
 
@@ -76,9 +76,9 @@ export interface SimpleContract extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  getName: TypedContractMethod<[], [string], "view">;
-
   setName: TypedContractMethod<[_name: string], [void], "nonpayable">;
+
+  getName: TypedContractMethod<[], [string], "view">;
 
   storeName: TypedContractMethod<[], [string], "view">;
 
@@ -87,11 +87,11 @@ export interface SimpleContract extends BaseContract {
   ): T;
 
   getFunction(
-    nameOrSignature: "getName"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
     nameOrSignature: "setName"
   ): TypedContractMethod<[_name: string], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "getName"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "storeName"
   ): TypedContractMethod<[], [string], "view">;
