@@ -78,7 +78,7 @@ function NamePanel() {
           On-chain Name
         </div>
 
-        <h1 className="text-6xl font-black bg-gradient-to-r from-cyan-400 via-sky-400 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(34,211,238,0.4)]">
+        <h1 className="text-5xl font-black bg-gradient-to-r from-cyan-400 via-sky-400 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(34,211,238,0.4)]">
           SimpleContract
         </h1>
 
@@ -142,10 +142,16 @@ function App() {
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-cyan-500/30 rounded-full blur-3xl animate-pulse [animation-delay:1s]" />
       <div className="absolute top-1/3 left-1/2 w-72 h-72 bg-pink-500/20 rounded-full blur-3xl animate-pulse [animation-delay:2s]" />
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl w-full">
-        <CounterPanel />
-        <NamePanel />
+      <div className="flex flex-col justify-center items-center gap-16">
+        <h1 className="text-6xl font-black bg-gradient-to-r from-cyan-500 via-pink-50 to-fuchsia-600 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(232,121,249,0.4)]">
+          Welcome to our App!
+        </h1>
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl w-full">
+          <CounterPanel />
+          <NamePanel />
+        </div>
       </div>
+
     </main>
   )
 }
