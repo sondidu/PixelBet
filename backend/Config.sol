@@ -58,4 +58,13 @@ contract Config {
         minMultiplier = min;
         maxMultiplier = max;
     }
+
+    function isValidGridSize(uint8 size) external view returns (bool) {
+        for (uint8 i = 0; i < validGridSizes.length; i++) {
+            if (validGridSizes[i] == size) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
