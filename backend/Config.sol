@@ -7,6 +7,9 @@ uint256 constant DEFAULT_HOUSE_FEE_PERCENTAGE = 5;
 uint256 constant DEFAULT_MIN_MULTIPLIER = 1000;
 uint256 constant DEFAULT_MAX_MULTIPLIER = 3000;
 
+uint8 constant MAX_GRID_SIZES_LENGTH = 10;
+uint8 constant MAX_BETTING_DURATIONS_LENGTH = 10;
+
 contract Config {
     uint256 public globalMinBet;            // in wei
     uint256 public globalMaxBet;            // in wei
@@ -53,6 +56,7 @@ contract Config {
     }
 
     function setValidGridSizes(uint8[] calldata sizes) external onlyOwner {
+        require(sizes.length <= MAX_GRID_SIZES_LENGTH, "Too many grid sizes!");
         for (uint8 i = 0; i < sizes.length; i++) {
             for (uint8 j = i + 1; j < sizes.length; j++) {
                 require(sizes[i] != sizes[j], "Valid grid sizes must be unique!");
@@ -63,6 +67,8 @@ contract Config {
     }
 
     function setValidBettingDurations(uint256[] calldata durations) external onlyOwner {
+        require(durations.length <= MAX_BETTING_DURATIONS_LENGTH, "Too many durations!");
+
         for (uint8 i = 0; i < durations.length; i++) {
             for (uint8 j = i + 1; j < durations.length; j++) {
                 require(durations[i] != durations[j], "Valid grid durations must be unique!");
