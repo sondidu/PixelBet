@@ -73,9 +73,8 @@ contract Config {
     }
 
     function setMultiplierRange(uint256 min, uint256 max) external onlyOwner {
-        require(min != 0, "Minimum bet can't be 0!");
-        require(max != 0, "Maximum bet can't be 0!");
-        require(min < max, "Minimum bet must be less than Maximum bet!");
+        require(min >= 1000, "Minimum multiplier (scaled by 1000) must be above 1000 (1000 = 1x)");
+        require(min < max, "Minimum multiplier must be less than Maximum multiplier!");
 
         minMultiplier = min;
         maxMultiplier = max;
