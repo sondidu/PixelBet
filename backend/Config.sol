@@ -23,7 +23,7 @@ contract Config {
     address public owner;                   // address of the person that deployed the contract
 
     modifier onlyOwner() {
-        require(msg.sender == owner);
+        require(msg.sender == owner, "Only the owner is allowed to do this operation!");
         _;
     }
 
