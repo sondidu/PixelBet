@@ -4,8 +4,8 @@ pragma solidity ^0.8.35;
 uint256 constant DEFAULT_GLOBAL_MIN_BET = 100 wei;                 // 10^-16 ETH
 uint256 constant DEFAULT_GLOBAL_MAX_BET = 1000000000000000000 wei; //      1 ETH
 uint256 constant DEFAULT_HOUSE_FEE_PERCENTAGE = 5;
-uint256 constant DEFAULT_MAX_MULTIPLIER = 3000;
 uint256 constant DEFAULT_MIN_MULTIPLIER = 1000;
+uint256 constant DEFAULT_MAX_MULTIPLIER = 3000;
 
 contract Config {
     uint256 public globalMinBet;            // in wei
@@ -14,8 +14,8 @@ contract Config {
     uint8[] public validGridSizes;          // [6, 7, 8, 9, 10, 11]
     uint8[] public validColourCounts;       // [3, 4, 5, 6, 7]
     uint256[] public validBettingDurations; // [300, 600, 1800, 3600]
-    uint256 public maxMultiplier;           // scaled by 1000, e.g. 3000 means 3x
     uint256 public minMultiplier;           // scaled by 1000, e.g. 1000 means 1x
+    uint256 public maxMultiplier;           // scaled by 1000, e.g. 3000 means 3x
     address public owner;                   // address of the person that deployed the contract
 
     modifier ownerOnly() {
