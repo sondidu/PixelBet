@@ -54,7 +54,7 @@ contract Config {
 
     function setValidGridSizes(uint8[] calldata sizes) external onlyOwner {
         for (uint8 i = 0; i < sizes.length; i++) {
-            for (uint8 j = 0; j < sizes.length; j++) {
+            for (uint8 j = i + 1; j < sizes.length; j++) {
                 require(sizes[i] != sizes[j], "Valid grid sizes must be unique!");
             }
         }
@@ -64,7 +64,7 @@ contract Config {
 
     function setValidBettingDurations(uint256[] calldata durations) external onlyOwner {
         for (uint8 i = 0; i < durations.length; i++) {
-            for (uint8 j = 0; j < durations.length; j++) {
+            for (uint8 j = i + 1; j < durations.length; j++) {
                 require(durations[i] != durations[j], "Valid grid durations must be unique!");
             }
         }
