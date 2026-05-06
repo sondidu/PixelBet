@@ -18,7 +18,7 @@ contract Config {
     uint256 public maxMultiplier;           // scaled by 1000, e.g. 3000 means 3x
     address public owner;                   // address of the person that deployed the contract
 
-    modifier ownerOnly() {
+    modifier onlyOwner() {
         require(msg.sender == owner);
         _;
     }
@@ -37,24 +37,24 @@ contract Config {
         owner = msg.sender;
     }
 
-    function setGlobalLimits(uint256 minBet, uint256 maxBet) external ownerOnly {
+    function setGlobalLimits(uint256 minBet, uint256 maxBet) external onlyOwner {
         globalMinBet = minBet;
         globalMaxBet = maxBet;
     }
 
-    function setHouseFeePercentage(uint256 feePercentage) external ownerOnly {
+    function setHouseFeePercentage(uint256 feePercentage) external onlyOwner {
         houseFeePercentage = feePercentage;
     }
 
-    function setValidGridSizes(uint8[] calldata sizes) external ownerOnly {
+    function setValidGridSizes(uint8[] calldata sizes) external onlyOwner {
         validGridSizes = sizes;
     }
 
-    function setValidBettingDurations(uint256[] calldata durations) external ownerOnly {
+    function setValidBettingDurations(uint256[] calldata durations) external onlyOwner {
         validBettingDurations = durations;
     }
 
-    function setMultiplierRange(uint256 min, uint256 max) external ownerOnly {
+    function setMultiplierRange(uint256 min, uint256 max) external onlyOwner {
         minMultiplier = min;
         maxMultiplier = max;
     }
