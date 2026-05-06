@@ -52,6 +52,7 @@ contract Config {
 
     function setHouseFeePercentage(uint256 feePercentage) external onlyOwner {
         require(feePercentage != 0, "Fee percentage can't be 0!");
+        require(feePercentage <= 100, "Fee percentage must be less than 100!");
 
         houseFeePercentage = feePercentage;
     }
