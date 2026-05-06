@@ -8,6 +8,7 @@ uint256 constant DEFAULT_MIN_MULTIPLIER = 1000;
 uint256 constant DEFAULT_MAX_MULTIPLIER = 3000;
 
 uint8 constant MAX_GRID_SIZES_LENGTH = 10;
+uint8 constant MAX_VALID_COLOUR_COUNTS_LENGTH = 10;
 uint8 constant MAX_BETTING_DURATIONS_LENGTH = 10;
 
 contract Config {
@@ -64,6 +65,17 @@ contract Config {
         }
 
         validGridSizes = sizes;
+    }
+
+    function setValidColours(uint8[] calldata colours) external onlyOwner {
+        require(colours.length <= MAX_VALID_COLOUR_COUNTS_LENGTH, "Too many colour counts!");
+        for (uint8 i = 0; i < colours.length; i++) {
+            for (uint8 j = i + 1; j < colours.length; j++) {
+                require(colours[i] != colours[j], "Valid colour counts must be unique!");
+            }
+        }
+
+        validColourCounts = colours;
     }
 
     function setValidBettingDurations(uint256[] calldata durations) external onlyOwner {
