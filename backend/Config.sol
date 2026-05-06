@@ -18,6 +18,11 @@ contract Config {
     uint256 public minMultiplier;           // scaled by 1000, e.g. 1000 means 1x
     address public owner;                   // address of the person that deployed the contract
 
+    modifier ownerOnly() {
+        require(msg.sender == owner);
+        _;
+    }
+
     constructor() {
         globalMinBet = DEFAULT_GLOBAL_MIN_BET;
         globalMaxBet = DEFAULT_GLOBAL_MAX_BET;
