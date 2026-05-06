@@ -38,23 +38,45 @@ contract Config {
     }
 
     function setGlobalLimits(uint256 minBet, uint256 maxBet) external onlyOwner {
+        require(minBet != 0, "Minimum bet can't be 0!");
+        require(maxBet != 0, "Maximum bet can't be 0!");
+        require(minBet < maxBet, "Minimum bet must be less than Maximum bet!");
+
         globalMinBet = minBet;
         globalMaxBet = maxBet;
     }
 
     function setHouseFeePercentage(uint256 feePercentage) external onlyOwner {
+        require(feePercentage != 0, "Fee percentage can't be 0!");
+
         houseFeePercentage = feePercentage;
     }
 
     function setValidGridSizes(uint8[] calldata sizes) external onlyOwner {
+        for (uint8 i = 0; i < sizes.length; i++) {
+            for (uint8 j = 0; j < sizes.length; j++) {
+                require(sizes[i] != sizes[j], "Valid grid sizes must be unique!");
+            }
+        }
+
         validGridSizes = sizes;
     }
 
     function setValidBettingDurations(uint256[] calldata durations) external onlyOwner {
+        for (uint8 i = 0; i < durations.length; i++) {
+            for (uint8 j = 0; j < durations.length; j++) {
+                require(durations[i] != durations[j], "Valid grid durations must be unique!");
+            }
+        }
+
         validBettingDurations = durations;
     }
 
     function setMultiplierRange(uint256 min, uint256 max) external onlyOwner {
+        require(min != 0, "Minimum bet can't be 0!");
+        require(max != 0, "Maximum bet can't be 0!");
+        require(min < max, "Minimum bet must be less than Maximum bet!");
+
         minMultiplier = min;
         maxMultiplier = max;
     }
