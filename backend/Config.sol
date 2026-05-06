@@ -36,4 +36,26 @@ contract Config {
         minMultiplier = DEFAULT_MIN_MULTIPLIER;
         owner = msg.sender;
     }
+
+    function setGlobalLimits(uint256 minBet, uint256 maxBet) external ownerOnly {
+        globalMinBet = minBet;
+        globalMaxBet = maxBet;
+    }
+
+    function setHouseFeePercentage(uint256 feePercentage) external ownerOnly {
+        houseFeePercentage = feePercentage;
+    }
+
+    function setValidGridSizes(uint8[] calldata sizes) external ownerOnly {
+        validGridSizes = sizes;
+    }
+
+    function setValidBettingDurations(uint256[] calldata durations) external ownerOnly {
+        validBettingDurations = durations;
+    }
+
+    function setMultiplierRange(uint256 min, uint256 max) external ownerOnly {
+        minMultiplier = min;
+        maxMultiplier = max;
+    }
 }
