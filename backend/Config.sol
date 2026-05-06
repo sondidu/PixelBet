@@ -76,4 +76,13 @@ contract Config {
         }
         return false;
     }
+
+    function isValidBettingDuration(uint256 duration) external view returns (bool) {
+        for (uint8 i = 0; i < validBettingDurations.length; i++) {
+            if (validBettingDurations[i] == duration) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
