@@ -67,4 +67,13 @@ contract Config {
         }
         return false;
     }
+
+    function isValidColourCount(uint8 count) external view returns (bool) {
+        for (uint8 i = 0; i < validColourCounts.length; i++) {
+            if (validColourCounts[i] == count) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
