@@ -11,6 +11,7 @@
     "typechain": "typechain --target ethers-v6 --out-dir src/types 'abis/*json'"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.2.4",
     "@tanstack/react-query": "^5.100.5",
     "ethers": "^6.16.0",
