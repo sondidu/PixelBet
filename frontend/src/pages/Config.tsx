@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import { useWallet } from '../context/WalletContext'
 import { useConfig } from '../hooks/useConfig'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 
 function formatDuration(seconds: number): string {
   const h = Math.floor(seconds / 3600)
@@ -92,9 +93,10 @@ function ConfigPage() {
           <Link
             to="https://eth-sepolia.blockscout.com/address/0xCb63b144703DdB057Ac3dfBb01eB8201A7C75b9A"
             target="_blank"
-            className="text-green-700 underline hover:text-green-900"
+            className="flex items-center justify-center text-green-700 underline hover:text-green-900"
           >
             View contract on Blockscout
+            <ArrowTopRightOnSquareIcon className="size-4 ml-1" />
           </Link>
         </>
       )}
