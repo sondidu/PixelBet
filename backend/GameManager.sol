@@ -147,4 +147,26 @@ contract GameManager {
     function getRound(uint256 roundId) external view returns(Round memory) {
         return rounds[roundId];
     }
+
+    function getRounds(bool onlyOpen) external view returns (Round[] memory) {
+        uint256 count = 0;
+
+        // Get count because solidity needs to know the size
+        for (uint256 i = 0; i < roundCounter; i++) {
+            if (!onlyOpen || rounds[i].state == RoundState.OPEN) {
+                count++;
+            }
+        }
+
+        Round[] memory result = new Round[](count);
+        uint256 idx = 0;
+
+        for (uint256 i = 0; i < roundCounter; i++) {
+            if (!onlyOpen || rounds[i].state == RoundState.OPEN) {
+                result[idx++] = rounds[i];
+            }
+        }
+
+        return result;
+    }
 }
