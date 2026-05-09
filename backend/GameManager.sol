@@ -5,7 +5,6 @@ import "./Config.sol";
 
 enum RoundState {
     OPEN,
-    BETTING_CLOSED,
     RESOLVED,
     CANCELLED
 }
@@ -80,7 +79,7 @@ contract GameManager {
     function resolveRound(uint256 roundId, bytes32 seed) external onlyHouse(roundId) {
         Round storage round = rounds[roundId];
 
-        require(round.state == RoundState.OPEN || round.state == RoundState.BETTING_CLOSED, "Round not resolvable!");
+        require(round.state == RoundState.OPEN, "Round not resolvable! Round must be OPEN!");
         require(block.timestamp >= round.bettingWindowEnd, "Betting window still open!");
         require(keccak256(abi.encodePacked(seed)) == round.commitHash, "Seed does not match commit hash!");
 
