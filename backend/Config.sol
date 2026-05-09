@@ -11,7 +11,18 @@ uint8 constant MAX_GRID_SIZES_LENGTH = 10;
 uint8 constant MAX_VALID_COLOUR_COUNTS_LENGTH = 10;
 uint8 constant MAX_BETTING_DURATIONS_LENGTH = 10;
 
-contract Config {
+interface IConfig {
+    function isValidGridSize(uint8 size) external view returns (bool);
+    function isValidColourCount(uint8 count) external view returns (bool);
+    function isValidBettingDuration(uint256 duration) external view returns (bool);
+    function globalMinBet() external view returns (uint256);
+    function globalMaxBet() external view returns (uint256);
+    function houseFeePercentage() external view returns (uint256);
+    function maxMultiplier() external view returns (uint256);
+    function minMultiplier() external view returns (uint256);
+}
+
+contract Config is IConfig {
     uint256 public globalMinBet;            // in wei
     uint256 public globalMaxBet;            // in wei
     uint256 public houseFeePercentage;      // raw percentage, e.g. 5 means 5%. House fee = pot * houseFeePercentage / 100
