@@ -143,4 +143,8 @@ contract GameManager {
         require(round.state != RoundState.RESOLVED && round.state != RoundState.CANCELLED, "Round already resolved or cancelled!");
         round.state = RoundState.CANCELLED;
     }
+
+    function getRound(uint256 roundId) external view returns(Round memory) {
+        return rounds[roundId];
+    }
 }
