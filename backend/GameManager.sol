@@ -30,6 +30,11 @@ contract GameManager {
     uint256 public roundCounter;
     IConfig public configContract;
 
+    modifier onlyHouse(uint256 roundId) {
+        require(msg.sender == rounds[roundId].house, "Not the house!");
+        _;
+    }
+
     constructor(address configContractAddress) {
         roundCounter = 0;
         configContract = IConfig(configContractAddress);
@@ -72,10 +77,9 @@ contract GameManager {
         return roundId;
     }
 
-    function resolveRound(uint256 roundId, bytes32 seed) external {
+    function resolveRound(uint256 roundId, bytes32 seed) external onlyHouse(roundId) {
         Round storage round = rounds[roundId];
 
-        require(msg.sender == round.house, "Not the house!");
         require(round.state == RoundState.OPEN || round.state == RoundState.BETTING_CLOSED, "Round not resolvable!");
         require(block.timestamp >= round.bettingWindowEnd, "Betting window still open!");
         require(keccak256(abi.encodePacked(seed)) == round.commitHash, "Seed does not match commit hash!");
