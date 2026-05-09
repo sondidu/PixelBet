@@ -71,4 +71,66 @@ contract GameManager {
 
         return roundId;
     }
+
+    function resolveRound(uint256 roundId, bytes32 seed) external {
+        Round storage round = rounds[roundId];
+
+        require(msg.sender == round.house, "Not the house!");
+        require(round.state == RoundState.OPEN || round.state == RoundState.BETTING_CLOSED, "Round not resolvable!");
+        require(block.timestamp >= round.bettingWindowEnd, "Betting window still open!");
+        require(keccak256(abi.encodePacked(seed)) == round.commitHash, "Seed does not match commit hash!");
+
+        // Generate board and count colours
+        uint256 totalCells = uint256(round.gridSize) * uint256(round.gridSize);
+        uint256[] memory counts = new uint256[](round.numColours);
+
+        for (uint256 i = 0; i < totalCells; i++) {
+            bytes32 cellHash = keccak256(abi.encodePacked(seed, i));
+            uint8 colourIndex = uint8(cellHash[0]) % round.numColours;
+            counts[colourIndex]++;
+        }
+
+        // Find the dominant colour
+        uint8 winningColour = 0;
+        uint256 highestCount = counts[0];
+        bool tied = false;
+        for (uint8 numColour = 1; numColour < round.numColours; numColour++) {
+            if (counts[numColour] > highestCount) {
+                highestCount = counts[numColour];
+                winningColour = numColour;
+                tied = false;
+            } else if (counts[numColour] == highestCount) {
+                tied = true;
+            }
+        }
+
+        // Tiebreaker if needed
+        if (tied) {
+            // Collect all colours that share the highest count
+            uint8 tiedCount = 0;
+            for (uint8 c = 0; c < round.numColours; c++) {
+                if (counts[c] == highestCount) {
+                    tiedCount++;
+                }
+            }
+
+            uint8[] memory tiedColours = new uint8[](tiedCount);
+            uint8 idx = 0;
+            for (uint8 c = 0; c < round.numColours; c++) {
+                if (counts[c] == highestCount) {
+                    tiedColours[idx] = c;
+                    idx++;
+                }
+            }
+
+            // Already sorted ascending since we iterate 0..numColours
+            bytes32 tieHash = keccak256(abi.encodePacked(seed, "tiebreaker"));
+            uint8 winnerIndex = uint8(tieHash[0]) % tiedCount;
+            winningColour = tiedColours[winnerIndex];
+        }
+
+        round.revealedSeed = seed;
+        round.winningColour = winningColour;
+        round.state = RoundState.RESOLVED;
+    }
 }
