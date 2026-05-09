@@ -137,4 +137,10 @@ contract GameManager {
         round.winningColour = winningColour;
         round.state = RoundState.RESOLVED;
     }
+
+    function cancelRound(uint256 roundId) external onlyHouse(roundId) {
+        Round storage round = rounds[roundId];
+        require(round.state != RoundState.RESOLVED && round.state != RoundState.CANCELLED, "Round already resolved or cancelled!");
+        round.state = RoundState.CANCELLED;
+    }
 }
