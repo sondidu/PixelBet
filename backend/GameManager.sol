@@ -26,11 +26,12 @@ struct Round {
 }
 
 contract GameManager {
+    mapping (uint256 => Round) private rounds;
+    uint256 public roundCounter;
     IConfig public configContract;
 
-    mapping (uint256 => Round) public rounds;
-
     constructor(address configContractAddress) {
+        roundCounter = 0;
         configContract = IConfig(configContractAddress);
     }
 }
