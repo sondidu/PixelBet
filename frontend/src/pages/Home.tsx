@@ -35,7 +35,7 @@ function shortenAddress(address: string): string {
 
 function Circle({ num }: { num: number }) {
   return (
-    <span className="shrink-0 w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center font-bold text-sm">
+    <span className="shrink-0 w-8 h-8 rounded-full [box-shadow:3px_3px_rgba(100,100,100,0.25)] bg-green-600 text-white flex items-center justify-center font-bold text-sm">
       {num}
     </span>
   )
@@ -43,8 +43,8 @@ function Circle({ num }: { num: number }) {
 
 function Card({ children }: { children: ReactNode }) {
   return (
-    <section className="px-4 pb-12">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
+    <section className="px-2 py-6">
+      <div className="max-w-3xl mx-auto bg-white rounded-lg [box-shadow:7px_7px_rgba(100,100,100,0.25)] px-6 py-4">
         {children}
       </div>
     </section>
