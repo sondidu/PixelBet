@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
-import type { ReactNode } from 'react'
+import Card from '../components/Card'
+import Button from '../components/Button'
 
 const BLOCKSCOUT_BASE = 'https://eth-sepolia.blockscout.com/address/'
 
@@ -41,16 +42,6 @@ function Circle({ num }: { num: number }) {
   )
 }
 
-function Card({ children }: { children: ReactNode }) {
-  return (
-    <section className="px-2 py-6">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg [box-shadow:7px_7px_rgba(100,100,100,0.25)] px-6 py-4">
-        {children}
-      </div>
-    </section>
-  )
-}
-
 function Home() {
   const navigate = useNavigate()
   const deployed = DEPLOYED_CONTRACTS.filter(c => c.address)
@@ -65,12 +56,9 @@ function Home() {
         <p className="mt-4 text-xl text-green-800 max-w-xl">
           Provably fair colour betting on the blockchain.
         </p>
-        <button
-          className="mt-10 group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-green-600 px-8 font-medium text-neutral-50 transition-all duration-75 [box-shadow:5px_5px_rgba(100,100,100,0.25)] active:translate-x-0.75 active:translate-y-0.75 active:[box-shadow:0px_0px_rgb(100_100_100)] cursor-pointer"
-          onClick={() => navigate('/select')}
-        >
+        <Button className="mt-10" onClick={() => navigate('/select')}>
           Play!
-        </button>
+        </Button>
       </section>
 
       {/* What is PixelBet? */}
