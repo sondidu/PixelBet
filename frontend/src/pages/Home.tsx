@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import Card from '../components/Card'
 import Button from '../components/Button'
+import githubIcon from '../assets/github.svg'
 
 const BLOCKSCOUT_BASE = 'https://eth-sepolia.blockscout.com/address/'
 
@@ -59,6 +60,15 @@ function Home() {
         <Button className="mt-10" onClick={() => navigate('/select')}>
           Play!
         </Button>
+        <a
+          href="https://github.com/sondidu/PixelBet"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 group relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-md border border-white bg-black px-6 font-medium text-white transition-all duration-75 hover:bg-gray-800 [box-shadow:5px_5px_rgba(100,100,100,0.25)] active:translate-x-0.75 active:translate-y-0.75 active:[box-shadow:0px_0px_rgb(100_100_100)] cursor-pointer"
+        >
+          <img src={githubIcon} alt="" className="size-7 invert" />
+          PixelBet
+        </a>
       </section>
 
       {/* What is PixelBet? */}
