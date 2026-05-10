@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { useWallet } from '../context/WalletContext'
 import { useConfig } from '../hooks/useConfig'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
+import Button from '../components/Button'
 
 function formatDuration(seconds: number): string {
   const h = Math.floor(seconds / 3600)
@@ -23,16 +24,13 @@ function ConfigPage() {
       <h1 className="font-bold text-4xl">Global Configuration</h1>
 
       {!account ? (
-        <button
-          className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-green-600 px-6 font-medium text-neutral-50 transition-all duration-75 [box-shadow:5px_5px_rgba(100,100,100,0.25)] active:translate-x-0.75 active:translate-y-0.75 active:[box-shadow:0px_0px_rgb(100_100_100)] cursor-pointer"
-          onClick={connect}
-        >
-          Connect Wallet
-        </button>
+        <Button onClick={connect}>Connect Wallet</Button>
       ) : (
         <>
           {isLoading && <p className="text-lg">Loading config...</p>}
-          {error && <p className="text-lg text-red-700">Error loading config</p>}
+          {error && (
+            <p className="text-lg text-red-700">Error loading config</p>
+          )}
 
           {data && (
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -48,42 +46,68 @@ function ConfigPage() {
                   <tr>
                     <td className="px-6 py-3 font-medium">Global Min Bet</td>
                     <td className="px-6 py-3">{data.globalMinBet} ETH</td>
-                    <td className="px-6 py-3 text-gray-500">{data.raw.globalMinBet} wei</td>
+                    <td className="px-6 py-3 text-gray-500">
+                      {data.raw.globalMinBet} wei
+                    </td>
                   </tr>
                   <tr>
                     <td className="px-6 py-3 font-medium">Global Max Bet</td>
                     <td className="px-6 py-3">{data.globalMaxBet} ETH</td>
-                    <td className="px-6 py-3 text-gray-500">{data.raw.globalMaxBet} wei</td>
+                    <td className="px-6 py-3 text-gray-500">
+                      {data.raw.globalMaxBet} wei
+                    </td>
                   </tr>
                   <tr>
                     <td className="px-6 py-3 font-medium">House Fee</td>
                     <td className="px-6 py-3">{data.houseFeePercentage}%</td>
-                    <td className="px-6 py-3 text-gray-500">{data.raw.houseFeePercentage}</td>
+                    <td className="px-6 py-3 text-gray-500">
+                      {data.raw.houseFeePercentage}
+                    </td>
                   </tr>
                   <tr>
                     <td className="px-6 py-3 font-medium">Min Multiplier</td>
                     <td className="px-6 py-3">{data.minMultiplier}x</td>
-                    <td className="px-6 py-3 text-gray-500">{data.raw.minMultiplier}</td>
+                    <td className="px-6 py-3 text-gray-500">
+                      {data.raw.minMultiplier}
+                    </td>
                   </tr>
                   <tr>
                     <td className="px-6 py-3 font-medium">Max Multiplier</td>
                     <td className="px-6 py-3">{data.maxMultiplier}x</td>
-                    <td className="px-6 py-3 text-gray-500">{data.raw.maxMultiplier}</td>
+                    <td className="px-6 py-3 text-gray-500">
+                      {data.raw.maxMultiplier}
+                    </td>
                   </tr>
                   <tr>
                     <td className="px-6 py-3 font-medium">Valid Grid Sizes</td>
-                    <td className="px-6 py-3">{data.validGridSizes.map((s) => `${s}x${s}`).join(', ')}</td>
-                    <td className="px-6 py-3 text-gray-500">[{data.validGridSizes.join(', ')}]</td>
+                    <td className="px-6 py-3">
+                      {data.validGridSizes.map(s => `${s}x${s}`).join(', ')}
+                    </td>
+                    <td className="px-6 py-3 text-gray-500">
+                      [{data.validGridSizes.join(', ')}]
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-3 font-medium">Valid Colour Counts</td>
-                    <td className="px-6 py-3">{data.validColourCounts.join(', ')}</td>
-                    <td className="px-6 py-3 text-gray-500">[{data.validColourCounts.join(', ')}]</td>
+                    <td className="px-6 py-3 font-medium">
+                      Valid Colour Counts
+                    </td>
+                    <td className="px-6 py-3">
+                      {data.validColourCounts.join(', ')}
+                    </td>
+                    <td className="px-6 py-3 text-gray-500">
+                      [{data.validColourCounts.join(', ')}]
+                    </td>
                   </tr>
                   <tr>
                     <td className="px-6 py-3 font-medium">Betting Durations</td>
-                    <td className="px-6 py-3">{data.validBettingDurations.map(formatDuration).join(', ')}</td>
-                    <td className="px-6 py-3 text-gray-500">[{data.validBettingDurations.join(', ')}] seconds</td>
+                    <td className="px-6 py-3">
+                      {data.validBettingDurations
+                        .map(formatDuration)
+                        .join(', ')}
+                    </td>
+                    <td className="px-6 py-3 text-gray-500">
+                      [{data.validBettingDurations.join(', ')}] seconds
+                    </td>
                   </tr>
                 </tbody>
               </table>
