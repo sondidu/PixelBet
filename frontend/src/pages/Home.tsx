@@ -153,7 +153,11 @@ function Home() {
     hash = keccak256(seed, i)
     colour = hash[0] % numColours
 
-winning colour = colour with the most cells`}</code>
+winning colour = colour with the most cells
+
+if tied:
+    sort tied colours by index
+    winning colour = tied[ keccak256(seed, "tiebreaker")[0] % numTied ]`}</code>
         </pre>
         <p className="text-gray-600 mt-4 text-sm">
           The same seed always produces the same board. Anyone can verify the
