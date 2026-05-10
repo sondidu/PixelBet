@@ -207,8 +207,31 @@ if tied:
       </Card>
 
       {/* Footer */}
-      <footer className="text-center text-green-900 text-sm py-6">
-        PixelBet — Built on Sepolia Ethereum
+      <footer className="text-center text-green-900 text-sm py-6 space-y-1">
+        <p>
+          PixelBet | IFB452 Blockchain Technology - Assignment 3 | Semester 1,
+          2026
+        </p>
+        <p>
+          By{' '}
+          <a
+            href="https://github.com/sondidu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-green-700"
+          >
+            @sondidu
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://github.com/xcl040"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-green-700"
+          >
+            @xcl040
+          </a>
+        </p>
       </footer>
     </main>
   )
