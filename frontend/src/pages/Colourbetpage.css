@@ -1,0 +1,48 @@
+/* ── Font ─────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+/* ── Tailwind config extension (add to tailwind.config.js instead if preferred) ──
+   font-bangers   → fontFamily: { bangers: ['Bangers', 'cursive'] }
+   animate-blink  → animation:  { blink: 'blink 0.5s ease infinite alternate' }
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── Blink animation (timer urgent) ─────────────────────────────────────── */
+@keyframes blink {
+  from { opacity: 1; }
+  to   { opacity: 0.35; }
+}
+.animate-blink {
+  animation: blink 0.5s ease infinite alternate;
+}
+
+/* ── Remove number input spinners ────────────────────────────────────────── */
+.no-spinner::-webkit-inner-spin-button,
+.no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spinner {
+  -moz-appearance: textfield;
+}
+
+/* ── Winner badge inner colour (::before can't be done with Tailwind) ────── */
+.winner-badge::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 14px;
+}
+.winner-badge[data-colour="red"]::before    { background: #e8000d; }
+.winner-badge[data-colour="yellow"]::before { background: #f5d000; }
+.winner-badge[data-colour="blue"]::before   { background: #1a18f5; }
+.winner-badge[data-colour="green"]::before  { background: #00a63e; }
+.winner-badge[data-colour="purple"]::before { background: #8b00cc; }
+.winner-badge[data-colour="orange"]::before { background: #f57200; }
+.winner-badge[data-colour="cyan"]::before   { background: #00b8d4; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 780px) {
+  .grid-cols-\[1fr_440px\] {
+    grid-template-columns: 1fr !important;
+  }
+}
