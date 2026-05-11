@@ -1,3 +1,4 @@
 artifacts/
 soljson-latest.js
 .states/
+.deps/
