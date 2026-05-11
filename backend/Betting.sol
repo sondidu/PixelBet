@@ -282,7 +282,9 @@ contract Betting is ReentrancyGuard {
     }
 
     /// @dev Total raw payout across ALL bets on the winning colour.
-    ///      Used to detect over-distribution and apply proportional scaling.
+    ///      Must be a round-wide invariant — do NOT filter by `claimed`, or the
+    ///      scaling denominator shrinks across successive claims and later
+    ///      winners get overpaid (and then stuck when the contract runs dry).
     function _calcTotalRawPayout(uint256 bettingId, uint8 winningColour)
         internal
         view
@@ -291,7 +293,7 @@ contract Betting is ReentrancyGuard {
         Bet[] storage allBets = bets[bettingId];
         for (uint256 i = 0; i < allBets.length; i++) {
             Bet storage bet = allBets[i];
-            if (!bet.claimed && bet.chosenColour == winningColour) {
+            if (bet.chosenColour == winningColour) {
                 total += (bet.amount * bet.multiplier) / 1000;
             }
         }
