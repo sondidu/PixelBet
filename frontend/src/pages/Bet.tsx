@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router";
-import "./ColourBetPage.css"; // only for: @keyframes blink, no-spinner, swatch ::before
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
